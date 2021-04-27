@@ -2,3 +2,6 @@
 /Coord.class
 /Couleur.class
 /PieceIHM.class
+/Piece.class
+/AbstractPiece.class
+/Tour.class
