@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public abstract	class AbstractPiece extends java.lang.Object implements Piece {
@@ -53,6 +54,14 @@ public abstract	class AbstractPiece extends java.lang.Object implements Piece {
 	}*/
 	public static void main(String[] args) {
 		
+		Scanner saisieUtilisateur = new Scanner(System.in); 
+		Piece maTour = new Tour(Couleur.NOIR, new Coord(0, 0));
+		System.out.println("Coo en X du deplacemnt :");
+		int DeplacemntX = saisieUtilisateur.nextInt(); 
+		System.out.println("Coo en Y du deplacemnt :"); 
+		int DeplacemntY = saisieUtilisateur.nextInt();
+		
+		System.out.println(maTour.isMoveOk(DeplacemntX, DeplacemntY));
 		
 	}
 	
