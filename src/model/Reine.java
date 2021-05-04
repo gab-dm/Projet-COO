@@ -1,10 +1,10 @@
 package model;
 
-public class Dame extends AbstractPiece {
+public class Reine extends AbstractPiece {
 	
-	public Dame(Couleur _couleur, Coord _coordonnee ) {
+	public Reine(Couleur _couleur, Coord _coordonnee ) {
 		super(_couleur, _coordonnee);
-		this.name = "Dame";
+		this.name = "Reine";
 		// TODO Auto-generated constructor stub
 	}
 	public boolean isMoveOk(int xFinal, int yFinal) {
