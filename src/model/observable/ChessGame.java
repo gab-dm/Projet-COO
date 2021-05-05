@@ -19,6 +19,7 @@ import model.Echiquier;
  * (DP Proxy, Facade, Observer)
  *
  */
+@SuppressWarnings("deprecation")
 public class ChessGame extends Observable implements BoardGames{
 
 	private Echiquier echiquier;
@@ -63,6 +64,7 @@ public class ChessGame extends Observable implements BoardGames{
 		ret = echiquier.isMoveOk(xInit, yInit, xFinal, yFinal);
 		if (ret){
 			ret = echiquier.move(xInit, yInit, xFinal, yFinal);
+			//System.out.print("moveOk");
 		}
 		if (ret){
 			echiquier.switchJoueur();

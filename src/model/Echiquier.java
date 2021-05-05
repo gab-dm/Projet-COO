@@ -34,7 +34,7 @@ public class Echiquier implements BoardGames {
 		}
 		return ret;
 	}
-	
+	/** renvoie true si le move est compris dans les coordonnées du plateau*/
 	public boolean isMoveOk(int xInit, int yInit, int xFinal, int yFinal) {
 		boolean ret = true;
 		
@@ -52,7 +52,7 @@ public class Echiquier implements BoardGames {
 		"Noirs : "+this.jeuNoir.toString();
 		
 	}
-	public void switchUser() {
+	public void switchJoueur() {
 		if( this.getColorCurrentPlayer()==Couleur.NOIR) {
 			
 			this.jeuNoir=this.jeuCourant;
@@ -73,7 +73,7 @@ public class Echiquier implements BoardGames {
 	@Override
 	public String getMessage() {
 		// TODO Auto-generated method stub
-		return null;
+		return "ok déplacement sans capture";
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class Echiquier implements BoardGames {
 		return ret;
 	}
 	
-	public List<PieceIHM> getPieceIHM () {
+	public List<PieceIHM> getPiecesIHM () {
 		List<PieceIHM> listPiecesIHM = this.jeuBlanc.getPiecesIHM();
 		listPiecesIHM.addAll(this.jeuNoir.getPiecesIHM());
 		return listPiecesIHM;

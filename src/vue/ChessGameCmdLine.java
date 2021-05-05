@@ -18,6 +18,7 @@ import controler.controlerLocal.ChessGameControler;
  * Vue console d'un jeu d'échec
  * Cette classe est un observateur et le damier est mis à jour à chaque changement dans la classe métier
  */
+@SuppressWarnings("deprecation")
 public class ChessGameCmdLine implements Observer{
 
 	ChessGameControler chessGameControler;
@@ -76,11 +77,12 @@ public class ChessGameCmdLine implements Observer{
 	public void go() {
 
 		System.out.print("\n Déplacement de 3,6 vers 3,4 = ");
+		
 		chessGameControler.move(new Coord(3,6), new Coord(3, 4));	// true
-
+		
 		// dans ce cas, update non appelé et pas d'affichage 
 		// controleur empêche le move car pas le bon joueur
-		System.out.print("\n Déplacement de 3,4 vers 3,6 = ");		
+		System.out.print("\n Déplacement de 3,4 vers 3,3 = ");		
 		chessGameControler.move(new Coord(3,4), new Coord(3, 6));	// false 
 
 		System.out.print("\n Déplacement de 4,1 vers 4,3 = ");
@@ -91,6 +93,9 @@ public class ChessGameCmdLine implements Observer{
 
 		System.out.print("\n Déplacement de 3,4 vers 4,3 = ");
 		chessGameControler.move(new Coord(3, 4), new Coord(4, 3));	// true		
+		
+		System.out.print("\n Déplacement de 3,4 vers 3,3 = ");
+		chessGameControler.move(new Coord(3, 4), new Coord(3, 3));	// true		
 
 	}
 
