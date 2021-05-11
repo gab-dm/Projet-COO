@@ -29,7 +29,9 @@ public abstract	class AbstractPiece extends java.lang.Object implements Pieces {
 		
 	}
 	
-	public abstract boolean isMoveOk (int _xFinal, int _yFinal);
+	public abstract boolean isMoveOk (int _xFinal, int _yFinal) ;
+	
+	
 	
 	public int getX () {
 		return this.coordonnee.x;

@@ -9,8 +9,10 @@ public class Roi extends AbstractPiece {
 	}
 	public boolean isMoveOk(int xFinal, int yFinal) {
 		boolean ret = false;
-		if ((Math.abs(this.getY()-yFinal)<=1) && (Math.abs(this.getX()-xFinal)<=1)) {
-			ret = true;
+		if ((this.getX() != xFinal) || (this.getY() != yFinal)){
+			if ((Math.abs(this.getY()-yFinal)<=1) && (Math.abs(this.getX()-xFinal)<=1)) {
+				ret = true;
+			}
 		}
 		return ret;
 	}

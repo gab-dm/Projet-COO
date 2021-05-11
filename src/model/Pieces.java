@@ -4,7 +4,7 @@ public interface Pieces {
 	boolean move (int _xFinal, int _yFinal) ;
 	boolean isMoveOk (int _xFinal, int _yFinal);
 	int getX ();
-	int getY () ;
+	int getY ();
 	Couleur getCouleur ();
 	
 }

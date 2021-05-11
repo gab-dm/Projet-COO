@@ -9,8 +9,10 @@ public class Reine extends AbstractPiece {
 	}
 	public boolean isMoveOk(int xFinal, int yFinal) {
 		boolean ret = false;
-		if ((Math.abs(this.getY()-yFinal)== Math.abs(this.getX()-xFinal)) || (this.getY()==yFinal) || (this.getX()==xFinal)) {
-			ret = true;
+		if ((this.getX() != xFinal) || (this.getY() != yFinal)){
+			if ((Math.abs(this.getY()-yFinal)== Math.abs(this.getX()-xFinal)) || (this.getY()==yFinal) || (this.getX()==xFinal)) {
+				ret = true;
+			}
 		}
 		return ret;
 	}

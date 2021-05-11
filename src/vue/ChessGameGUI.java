@@ -31,15 +31,16 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	JLayeredPane layeredPane;
 	JPanel chessBoard;
 	JLabel chessPiece;
-	
+	boolean SetUpDepart;
 	int xAdjustment;
 	int yAdjustment;
+	List<Integer>DeplacementCoord = Arrays.asList(0,0,0,0);
 	
 	public ChessGameGUI ( String _name, ChessGameControlers _chessGameControler, Dimension _boardSize) {
 		this.name = _name;
 		this.chessGameControler=_chessGameControler;
 		this.boardSize =_boardSize;
-		
+		this.SetUpDepart=false;
 		
 		 //  Use a Layered Pane for this this application
 		layeredPane = new JLayeredPane();
@@ -68,80 +69,6 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		}
 		 //Add a few pieces to the board
 		 
-		  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.NOIR)));				  									
-		  JPanel panel = (JPanel)chessBoard.getComponent(0);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(7);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Cavalier", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(1);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Cavalier", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(6);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Fou", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(2);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Fou", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(5);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Reine", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(3);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Roi", Couleur.NOIR)));				  									
-		  panel = (JPanel)chessBoard.getComponent(4);
-		  panel.add(piece);
-		  
-		  for (int i=0; i<8;i++) {
-			  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Pion", Couleur.NOIR)));				  									
-			  panel = (JPanel)chessBoard.getComponent(8+i);
-			  panel.add(piece);
-		  }
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(56);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(63);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Cavalier", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(57);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Cavalier", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(62);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Fou", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(58);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Fou", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(61);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Reine", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(59);
-		  panel.add(piece);
-		  
-		  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Roi", Couleur.BLANC)));				  									
-		  panel = (JPanel)chessBoard.getComponent(60);
-		  panel.add(piece);
-		  
-		  for (int i=0; i<8;i++) {
-			  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Pion", Couleur.BLANC)));				  									
-			  panel = (JPanel)chessBoard.getComponent(48+i);
-			  panel.add(piece);
-		  }
 	}
 		  
 
@@ -150,24 +77,28 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
+		if (this.SetUpDepart==false) {
 			
-		System.out.println(chessGameControler.getMessage() + "\n");	
+			System.out.println(chessGameControler.getMessage() + "\n");	
 
-		List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
+			List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
 
-		
-		// création d'un tableau 2D avec les noms des pièces
-		for(PieceIHM pieceIHM : piecesIHM) {
+			
+			// création d'un tableau 2D avec les noms des pièces
+			for(PieceIHM pieceIHM : piecesIHM) {
 
-			Couleur color = pieceIHM.getCouleur();
-			String  type = pieceIHM.getTypePiece();
-			for(Coord coord : pieceIHM.getList()) {
-				
-			  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(type, color)));				  									
-			  JPanel panel = (JPanel)chessBoard.getComponent(coord.x+coord.y*8);
-			  panel.add(piece);
-			}	
+				Couleur color = pieceIHM.getCouleur();
+				String  type = pieceIHM.getTypePiece();
+				for(Coord coord : pieceIHM.getList()) {
+					
+				  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(type, color)));				  									
+				  JPanel panel = (JPanel)chessBoard.getComponent(coord.x+coord.y*8);
+				  panel.add(piece);
+				  this.SetUpDepart=true;
+				}	
+			}
 		}
+	
 				
 	}
 			
@@ -208,16 +139,14 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  Point parentLocation = c.getParent().getLocation();
 		  xAdjustment = parentLocation.x - e.getX();
 		  yAdjustment = parentLocation.y - e.getY();
-<<<<<<< HEAD
-		  this.CoordDeplacement.set(0, (parentLocation.x-2)/87 ); 
+
+		  this.DeplacementCoord.set(0, (parentLocation.x-2)/87 ); 
 		  
-		  this.CoordDeplacement.set(1, (parentLocation.y-2)/87 ); 
+		  this.DeplacementCoord.set(1, (parentLocation.y-2)/87 ); 
 		  
 		  //System.out.print(this.CoordDeplacement.get(0) + " "+ this.CoordDeplacement.get(1) + " " + xAdjustment+ " " + yAdjustment +"\n");
 		  
-		  
-=======
->>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
+
 		  chessPiece = (JLabel)c;
 		  chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		  chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
@@ -229,41 +158,60 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	public void mouseReleased(MouseEvent e) {
 		if(chessPiece == null) return;
 		 
-		  chessPiece.setVisible(false);
-		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-		 
-		  if (c instanceof JLabel){
-		  Container parent = c.getParent();
-<<<<<<< HEAD
-		  //Point parentLocation = c.getParent().getLocation();
-		  
-		  this.CoordDeplacement.set(2, (c.getParent().getLocation().x-2)/87 ); 
-		  
-		  this.CoordDeplacement.set(3, (c.getParent().getLocation().y-2)/87 );
-		  
-		  System.out.print(this.CoordDeplacement + "\n");
-		  
-=======
->>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
-		  parent.remove(0);
-		  parent.add( chessPiece );
+			  chessPiece.setVisible(false);
+			  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
+			 
+			  if (c instanceof JLabel){
+			  Container parent = c.getParent();
+	
+			  //Point parentLocation = c.getParent().getLocation();
+			  
+			  this.DeplacementCoord.set(2, (c.getParent().getLocation().x-2)/87 ); 
+			  
+			  this.DeplacementCoord.set(3, (c.getParent().getLocation().y-2)/87 );
+			  
+			  //System.out.print(this.DeplacementCoord + "\n");
+			  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.DeplacementCoord.get(0),this.DeplacementCoord.get(1)), new Coord(this.DeplacementCoord.get(2),this.DeplacementCoord.get(3)));
+			  System.out.print(isDeplacementAutorise + ""+this.DeplacementCoord+ "\n");
+			  if (isDeplacementAutorise) {
+				parent.remove(0);
+				parent.add( chessPiece );
+			  }
+			  else {
+				  chessPiece.setLocation(this.DeplacementCoord.get(0)*87+2, this.DeplacementCoord.get(1)*87+2);
+				 
+				  
+				  Component b=  chessBoard.findComponentAt(chessPiece.getLocation());
+				  Container parentb = (Container) b;
+				  parentb.add(chessPiece);
+			  }
+			  
 		  }
 		  else {
-		  Container parent = (Container)c;
-<<<<<<< HEAD
-		  parent.add(chessPiece);
-		  Point parentLocation = c.getLocation();
-		  
-		  this.CoordDeplacement.set(2, (parentLocation.x-2)/87 ); 
-		  
-		  this.CoordDeplacement.set(3, (parentLocation.y-2)/87 );
-		  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.CoordDeplacement.get(0),this.CoordDeplacement.get(1)), new Coord(this.CoordDeplacement.get(2),this.CoordDeplacement.get(3)));
-		  System.out.print(isDeplacementAutorise);
-		  
-		  
-=======
-		  parent.add( chessPiece );
->>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
+			  Container parent = (Container)c;
+	
+			  
+			  Point parentLocation = c.getLocation();
+			  
+			  this.DeplacementCoord.set(2, (parentLocation.x-2)/87 ); 
+			  
+			  this.DeplacementCoord.set(3, (parentLocation.y-2)/87 );
+			  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.DeplacementCoord.get(0),this.DeplacementCoord.get(1)), new Coord(this.DeplacementCoord.get(2),this.DeplacementCoord.get(3)));
+			  System.out.print(isDeplacementAutorise + ""+this.DeplacementCoord+ "\n");
+			  
+			  
+				  if (isDeplacementAutorise) {
+					  parent.add( chessPiece );
+				  }
+				  else {
+					  chessPiece.setLocation(this.DeplacementCoord.get(0)*87+2, this.DeplacementCoord.get(1)*87+2);
+					  
+					  
+					  Component b=  chessBoard.findComponentAt(chessPiece.getLocation());
+					  Container parentb = (Container) b;
+					  parentb.add(chessPiece);
+					  
+				  }
 		  }
 		 
 		  chessPiece.setVisible(true);

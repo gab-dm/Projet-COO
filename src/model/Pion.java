@@ -14,35 +14,36 @@ public class Pion extends AbstractPiece {
 	}
 	public boolean isMoveOk(int xFinal, int yFinal) {
 		boolean ret = false;
-		if (this.couleur == Couleur.NOIR) {
-			if (this.firstMove) {
-				if ((this.getX()==xFinal) && (yFinal -this.getY()<=2)) {
-					this.firstMove=false;
-					ret=true;
+		if ((this.getX() != xFinal) || (this.getY() != yFinal)){
+			if (this.couleur == Couleur.NOIR) {
+				if (this.firstMove) {
+					if ((this.getX()==xFinal) && (yFinal -this.getY()<=2)) {
+						this.firstMove=false;
+						ret=true;
+					}
+				}
+				else {
+					if ((this.getX()==xFinal) && (yFinal -this.getY()==1)) {		
+						ret=true;
+					}
 				}
 			}
-			else {
-				if ((this.getX()==xFinal) && (yFinal -this.getY()==1)) {		
-					ret=true;
+			else{
+				if (this.firstMove) {
+					if ((this.getX()==xFinal) && (this.getY()-yFinal <=2)) {
+						this.firstMove=false;
+						ret=true;
+					}
+				}
+				else {
+					if ((this.getX()==xFinal) && (this.getY()-yFinal ==1)) {
+						
+						ret=true;
+					}
 				}
 			}
-		}
-		else{
-			if (this.firstMove) {
-				if ((this.getX()==xFinal) && (this.getY()-yFinal <=2)) {
-					this.firstMove=false;
-					ret=true;
-				}
-			}
-			else {
-				if ((this.getX()==xFinal) && (this.getY()-yFinal ==1)) {
-					
-					ret=true;
-				}
-			}
-		}
 		
-		
+		}
 		return ret;
 	}
 }
