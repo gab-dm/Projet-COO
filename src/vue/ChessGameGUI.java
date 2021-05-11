@@ -67,7 +67,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  square.setBackground( i % 2 == 0 ? Color.pink : Color.white );
 		}
 		 //Add a few pieces to the board
-		 
+		 /*
 		  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.NOIR)));				  									
 		  JPanel panel = (JPanel)chessBoard.getComponent(0);
 		  panel.add(piece);
@@ -142,6 +142,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 			  panel = (JPanel)chessBoard.getComponent(48+i);
 			  panel.add(piece);
 		  }
+		  */
 	}
 		  
 
