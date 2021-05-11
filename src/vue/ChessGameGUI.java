@@ -35,13 +35,11 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	int xAdjustment;
 	int yAdjustment;
 	
-	List<Integer> CoordDeplacement=Arrays.asList(0,0,0,0);
-	
-	
 	public ChessGameGUI ( String _name, ChessGameControlers _chessGameControler, Dimension _boardSize) {
 		this.name = _name;
 		this.chessGameControler=_chessGameControler;
 		this.boardSize =_boardSize;
+		
 		
 		 //  Use a Layered Pane for this this application
 		layeredPane = new JLayeredPane();
@@ -68,9 +66,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  else
 		  square.setBackground( i % 2 == 0 ? Color.pink : Color.white );
 		}
-		
 		 //Add a few pieces to the board
-		 /*
+		 
 		  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Tour", Couleur.NOIR)));				  									
 		  JPanel panel = (JPanel)chessBoard.getComponent(0);
 		  panel.add(piece);
@@ -144,7 +141,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 			  piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile("Pion", Couleur.BLANC)));				  									
 			  panel = (JPanel)chessBoard.getComponent(48+i);
 			  panel.add(piece);
-		  } */
+		  }
 	}
 		  
 
@@ -211,6 +208,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  Point parentLocation = c.getParent().getLocation();
 		  xAdjustment = parentLocation.x - e.getX();
 		  yAdjustment = parentLocation.y - e.getY();
+<<<<<<< HEAD
 		  this.CoordDeplacement.set(0, (parentLocation.x-2)/87 ); 
 		  
 		  this.CoordDeplacement.set(1, (parentLocation.y-2)/87 ); 
@@ -218,6 +216,8 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  //System.out.print(this.CoordDeplacement.get(0) + " "+ this.CoordDeplacement.get(1) + " " + xAdjustment+ " " + yAdjustment +"\n");
 		  
 		  
+=======
+>>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
 		  chessPiece = (JLabel)c;
 		  chessPiece.setLocation(e.getX() + xAdjustment, e.getY() + yAdjustment);
 		  chessPiece.setSize(chessPiece.getWidth(), chessPiece.getHeight());
@@ -231,10 +231,10 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		 
 		  chessPiece.setVisible(false);
 		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-
-		  
+		 
 		  if (c instanceof JLabel){
 		  Container parent = c.getParent();
+<<<<<<< HEAD
 		  //Point parentLocation = c.getParent().getLocation();
 		  
 		  this.CoordDeplacement.set(2, (c.getParent().getLocation().x-2)/87 ); 
@@ -243,11 +243,14 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  
 		  System.out.print(this.CoordDeplacement + "\n");
 		  
+=======
+>>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
 		  parent.remove(0);
 		  parent.add( chessPiece );
 		  }
 		  else {
 		  Container parent = (Container)c;
+<<<<<<< HEAD
 		  parent.add(chessPiece);
 		  Point parentLocation = c.getLocation();
 		  
@@ -258,6 +261,9 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  System.out.print(isDeplacementAutorise);
 		  
 		  
+=======
+		  parent.add( chessPiece );
+>>>>>>> c2e1a13d9b4f95cb006b1edf9dc02f232f889a50
 		  }
 		 
 		  chessPiece.setVisible(true);
