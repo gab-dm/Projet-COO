@@ -14,7 +14,7 @@ public  class PieceIHM {
 	String type;
 	Couleur couleur;
 	List<Coord> list;
-	
+	List list2;
 	PieceIHM(String type, Couleur couleur) {
 		this.type = type;
 		this.couleur = couleur;
