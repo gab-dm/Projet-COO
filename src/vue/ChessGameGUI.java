@@ -215,7 +215,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  
 		  this.CoordDeplacement.set(1, (parentLocation.y-2)/87 ); 
 		  
-		  System.out.print(this.CoordDeplacement.get(0) + " "+ this.CoordDeplacement.get(1) + " " + xAdjustment+ " " + yAdjustment +"\n");
+		  //System.out.print(this.CoordDeplacement.get(0) + " "+ this.CoordDeplacement.get(1) + " " + xAdjustment+ " " + yAdjustment +"\n");
 		  
 		  
 		  chessPiece = (JLabel)c;
@@ -235,11 +235,11 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  
 		  if (c instanceof JLabel){
 		  Container parent = c.getParent();
-		  Point parentLocation = c.getParent().getLocation();
+		  //Point parentLocation = c.getParent().getLocation();
 		  
-		  this.CoordDeplacement.set(2, (parentLocation.x-2)/87 ); 
+		  this.CoordDeplacement.set(2, (c.getParent().getLocation().x-2)/87 ); 
 		  
-		  this.CoordDeplacement.set(3, (parentLocation.y-2)/87 );
+		  this.CoordDeplacement.set(3, (c.getParent().getLocation().y-2)/87 );
 		  
 		  System.out.print(this.CoordDeplacement + "\n");
 		  
@@ -247,15 +247,15 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  parent.add( chessPiece );
 		  }
 		  else {
-		  Container parent = (Container)c;		  
+		  Container parent = (Container)c;
+		  parent.add(chessPiece);
 		  Point parentLocation = c.getLocation();
 		  
 		  this.CoordDeplacement.set(2, (parentLocation.x-2)/87 ); 
 		  
 		  this.CoordDeplacement.set(3, (parentLocation.y-2)/87 );
-		  
-		  System.out.print(this.CoordDeplacement + "\n");
-		  parent.add( chessPiece );
+		  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.CoordDeplacement.get(0),this.CoordDeplacement.get(1)), new Coord(this.CoordDeplacement.get(2),this.CoordDeplacement.get(3)));
+		  System.out.print(isDeplacementAutorise);
 		  
 		  
 		  }
@@ -284,28 +284,5 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		  frame.setLocationRelativeTo( null );
 		  frame.setVisible(true);
 	}*/
-	public void go() {
-
-		System.out.print("\n Déplacement de 3,6 vers 3,4 = ");
-		
-		chessGameControler.move(new Coord(3,6), new Coord(3, 4));	// true
-		
-		// dans ce cas, update non appelé et pas d'affichage 
-		// controleur empêche le move car pas le bon joueur
-		System.out.print("\n Déplacement de 3,4 vers 3,3 = ");		
-		chessGameControler.move(new Coord(3,4), new Coord(3, 6));	// false 
-
-		System.out.print("\n Déplacement de 4,1 vers 4,3 = ");
-		chessGameControler.move(new Coord(4, 1), new Coord(4, 3));	// true
-
-		System.out.print("\n Déplacement de 3,4 vers 3,4 = ");
-		chessGameControler.move(new Coord(3, 4), new Coord(3, 4));	// false
-
-		System.out.print("\n Déplacement de 3,4 vers 4,3 = ");
-		chessGameControler.move(new Coord(3, 4), new Coord(4, 3));	// true		
-		
-		System.out.print("\n Déplacement de 3,4 vers 3,3 = ");
-		chessGameControler.move(new Coord(3, 4), new Coord(3, 3));	// true		
-
-	}
+	
 }
