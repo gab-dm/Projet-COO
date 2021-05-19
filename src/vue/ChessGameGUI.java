@@ -40,7 +40,7 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 		this.name = _name;
 		this.chessGameControler=_chessGameControler;
 		this.boardSize =_boardSize;
-		this.SetUpDepart=false;
+		this.SetUpDepart=true;
 		
 		 //  Use a Layered Pane for this this application
 		layeredPane = new JLayeredPane();
@@ -77,25 +77,33 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
-		if (this.SetUpDepart==false) {
+		for(int i = 0 ;i<64;i++) {
+			JPanel panel = (JPanel) chessBoard.getComponent(i);
+			//panel.removeAll();
 			
-			System.out.println(chessGameControler.getMessage() + "\n");	
-
-			List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
-
+		}
 			
-			// création d'un tableau 2D avec les noms des pièces
+		System.out.println(chessGameControler.getMessage() + "\n");	
+
+		List<PieceIHM> piecesIHM = (List<PieceIHM>) arg1;
+
+		
+		// création d'un tableau 2D avec les noms des pièces
+		if (this.SetUpDepart) {
+			System.out.println("ttata");
 			for(PieceIHM pieceIHM : piecesIHM) {
-
+	
 				Couleur color = pieceIHM.getCouleur();
 				String  type = pieceIHM.getTypePiece();
 				for(Coord coord : pieceIHM.getList()) {
 					
 				  JLabel piece = new JLabel( new ImageIcon(ChessImageProvider.getImageFile(type, color)));				  									
+				  
 				  JPanel panel = (JPanel)chessBoard.getComponent(coord.x+coord.y*8);
 				  panel.add(piece);
-				  this.SetUpDepart=true;
-				}	
+				  
+					 
+				}
 			}
 		}
 	
@@ -158,63 +166,35 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	public void mouseReleased(MouseEvent e) {
 		if(chessPiece == null) return;
 		 
-			  chessPiece.setVisible(false);
-			  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
-			 
-			  if (c instanceof JLabel){
-			  Container parent = c.getParent();
-	
-			  //Point parentLocation = c.getParent().getLocation();
+		  
+		  Component c =  chessBoard.findComponentAt(e.getX(), e.getY());
+		 
+		  if (c instanceof JLabel){
 			  
 			  this.DeplacementCoord.set(2, (c.getParent().getLocation().x-2)/87 ); 
 			  
 			  this.DeplacementCoord.set(3, (c.getParent().getLocation().y-2)/87 );
-			  
-			  //System.out.print(this.DeplacementCoord + "\n");
+		  
+		  //System.out.print(this.DeplacementCoord + "\n");
 			  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.DeplacementCoord.get(0),this.DeplacementCoord.get(1)), new Coord(this.DeplacementCoord.get(2),this.DeplacementCoord.get(3)));
 			  System.out.print(isDeplacementAutorise + ""+this.DeplacementCoord+ "\n");
-			  if (isDeplacementAutorise) {
-				parent.remove(0);
-				parent.add( chessPiece );
-			  }
-			  else {
-				  chessPiece.setLocation(this.DeplacementCoord.get(0)*87+2, this.DeplacementCoord.get(1)*87+2);
-				 
-				  
-				  Component b=  chessBoard.findComponentAt(chessPiece.getLocation());
-				  Container parentb = (Container) b;
-				  parentb.add(chessPiece);
-			  }
 			  
 		  }
 		  else {
-			  Container parent = (Container)c;
-	
-			  
+			 
+
 			  Point parentLocation = c.getLocation();
 			  
 			  this.DeplacementCoord.set(2, (parentLocation.x-2)/87 ); 
 			  
 			  this.DeplacementCoord.set(3, (parentLocation.y-2)/87 );
 			  boolean isDeplacementAutorise = chessGameControler.move(new Coord(this.DeplacementCoord.get(0),this.DeplacementCoord.get(1)), new Coord(this.DeplacementCoord.get(2),this.DeplacementCoord.get(3)));
+			  System.out.print("toto");
 			  System.out.print(isDeplacementAutorise + ""+this.DeplacementCoord+ "\n");
 			  
-			  
-				  if (isDeplacementAutorise) {
-					  parent.add( chessPiece );
-				  }
-				  else {
-					  chessPiece.setLocation(this.DeplacementCoord.get(0)*87+2, this.DeplacementCoord.get(1)*87+2);
-					  
-					  
-					  Component b=  chessBoard.findComponentAt(chessPiece.getLocation());
-					  Container parentb = (Container) b;
-					  parentb.add(chessPiece);
-					  
-				  }
 		  }
 		 
-		  chessPiece.setVisible(true);
+		 
 	}
 
 
