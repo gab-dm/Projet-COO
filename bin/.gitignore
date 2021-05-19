@@ -7,8 +7,8 @@
 /LauncherCmdLine.class
 /LauncherGUI.class
 /PieceIHM.class
+/controler/
+/launcher/
 /model/
 /tools/
 /vue/
-/controler/
-/launcher/
