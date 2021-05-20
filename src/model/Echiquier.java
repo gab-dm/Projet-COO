@@ -26,11 +26,55 @@ public class Echiquier implements BoardGames {
 	}
 	
 	public boolean move (int xInit, int yInit, int xFinal, int yFinal) {
-		boolean ret = false;
+		boolean ret = true;
 		boolean isThisMoveOk = this.isMoveOk(xInit, yInit, xFinal, yFinal);
 		if (isThisMoveOk) {
 			Pieces pieceABouger = jeuCourant.findPiece(xInit, yInit);
-			ret =pieceABouger.move(xFinal, yFinal);
+			if (pieceABouger.isMoveOk(xFinal, yFinal)) {
+				
+				//on va tester si des pieces se trouvent sur le chemin 
+				List<Coord> casesParcourues = pieceABouger.casesParcourues(xFinal, yFinal);
+				for (int i =0; i<casesParcourues.size()-1;i++) {
+					if(this.jeuNoir.findPiece(casesParcourues.get(i).x, casesParcourues.get(i).y) !=null) {
+						ret =false;
+						break;
+					}
+					if(this.jeuBlanc.findPiece(casesParcourues.get(i).x, casesParcourues.get(i).y) !=null) {
+						ret =false;
+						break;
+					}
+					
+				}
+				if((this.jeuNoir.findPiece(casesParcourues.get(casesParcourues.size()-1).x, casesParcourues.get(casesParcourues.size()-1).y) !=null)) {
+					if (pieceABouger.getCouleur()==Couleur.NOIR) {
+						ret =false;
+					}
+					else {
+						jeuNoir.removePiece(this.jeuNoir.findPiece(casesParcourues.get(casesParcourues.size()-1).x, casesParcourues.get(casesParcourues.size()-1).y));
+					}
+					
+					
+				}
+				if((this.jeuBlanc.findPiece(casesParcourues.get(casesParcourues.size()-1).x, casesParcourues.get(casesParcourues.size()-1).y) !=null)) {
+					if (pieceABouger.getCouleur()==Couleur.BLANC){
+						ret =false;
+					}
+					else {
+						this.jeuBlanc.removePiece(this.jeuBlanc.findPiece(casesParcourues.get(casesParcourues.size()-1).x, casesParcourues.get(casesParcourues.size()-1).y));
+					}
+					
+				}
+				
+				
+			}
+			if (ret) {
+				pieceABouger.move(xFinal, yFinal);
+			}
+			
+			
+		}
+		else {
+			ret=false;
 		}
 		return ret;
 	}

@@ -27,7 +27,9 @@ public class Jeu {
 		}
 		return pieceRetournee;
 	}
-	
+	public void removePiece(Pieces piece) {
+		this.pieces.remove(piece);
+	}
 	/**
 	* @return une vue de la liste des pièces en cours
 	* ne donnant que des accès en lecture sur des PieceIHM

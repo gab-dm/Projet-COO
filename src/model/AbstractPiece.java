@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -18,20 +19,27 @@ public abstract	class AbstractPiece extends java.lang.Object implements Pieces {
 		//this.type= _type;
 	}
 	
-	public boolean move (int _x, int _y) {
-		boolean deplacement = isMoveOk(_x, _y);
-
-		if (deplacement) {
-			this.coordonnee.x = _x;
-			this.coordonnee.y = _y;
-		}
-		return deplacement;
+	public void move (int _x, int _y) {
+		
+		this.coordonnee.x = _x;
+		this.coordonnee.y = _y;
+		
 		
 	}
 	
 	public abstract boolean isMoveOk (int _xFinal, int _yFinal) ;
 	
-	
+	public List<Coord> casesParcourues(int xFinal, int yFinal) {
+		List<Coord> casesParcourues = new ArrayList<Coord>();
+		for(int i=1;i<= Math.abs(this.getY()-yFinal);i++){
+			
+			int caseX=this.getX()+(xFinal-this.getX())/Math.abs(this.getY()-yFinal)*i;
+			int caseY=this.getY()+(yFinal-this.getY())/Math.abs(this.getY()-yFinal)*i;
+			Coord coo = new Coord(caseX, caseY);
+			casesParcourues.add(coo);
+		}
+		return casesParcourues;
+	}
 	
 	public int getX () {
 		return this.coordonnee.x;

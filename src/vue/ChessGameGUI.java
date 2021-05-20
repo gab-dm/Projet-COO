@@ -77,11 +77,17 @@ public class ChessGameGUI extends JFrame implements MouseListener,MouseMotionLis
 	public void update(Observable arg0, Object arg1) {
 		// TODO Auto-generated method stub
 		
-		for(int i = 0 ;i<64;i++) {
-			JPanel panel = (JPanel) chessBoard.getComponent(i);
-			//panel.removeAll();
-			
-		}
+//		for(int i = 0 ;i<64;i++) {
+//			JPanel panel = (JPanel) chessBoard.getComponent(i);
+//			for(i =0;i<5;i++) {
+//				Component c= panel.getComponent(i);
+//				if (c instanceof JLabel){
+//					c.disable();
+//				}
+//				
+//			}
+//			
+//		}
 			
 		System.out.println(chessGameControler.getMessage() + "\n");	
 

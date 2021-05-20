@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cavalier extends AbstractPiece {
 	
 	
@@ -24,4 +27,20 @@ public class Cavalier extends AbstractPiece {
 		
 		return ret;
 	}
+	@Override
+	public List<Coord> casesParcourues(int xFinal, int yFinal) {
+		List<Coord> casesParcourues = new ArrayList<Coord>();
+		Coord coo = new Coord(xFinal, yFinal);
+		casesParcourues.add(coo);
+		
+		return casesParcourues;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
